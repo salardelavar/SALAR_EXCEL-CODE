@@ -1,0 +1,27 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// five days price pride
+// Quartic Equation
+var df01,df02,df03,df04,df05,df06,df07,df08,df09,df10,f;
+df01 = [ih][4].PClosing - [ih][5].PClosing;
+df02 = [ih][3].PClosing - [ih][4].PClosing;
+df03 = [ih][2].PClosing - [ih][3].PClosing;
+df04 = [ih][1].PClosing - [ih][2].PClosing;
+
+df05 = df02-df01;
+df06 = df03-df02;
+df07 = df04-df03;
+
+df08 = df06-df05;
+df09 = df07-df06;
+
+df10 = df09-df08;
+f = [ih][5].PClosing + 5*df01 + 10*df05 +  10*df08 + 5*df10;
+
+if (f == [ih][0].PClosing){
+return true;
+}
+else{
+return false;
+}  
+}()

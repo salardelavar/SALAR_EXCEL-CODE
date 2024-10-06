@@ -1,0 +1,18 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// three days price pride
+// Quadratic Equation
+var df01,df02,df03,f;
+df01 = [ih][2].PClosing - [ih][3].PClosing;
+df02 = [ih][1].PClosing - [ih][2].PClosing;
+
+df03 = df02-df01;
+f = [ih][3].PClosing + 4*df01 + 2*df03;
+
+if (f == [ih][0].PClosing){
+return true;
+}
+else{
+return false;
+}  
+}()

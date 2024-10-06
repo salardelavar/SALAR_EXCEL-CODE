@@ -1,0 +1,1 @@
+((((ct).Buy_N_Volume/(ct).Buy_CountN) - ((ct).Sell_N_Volume/(ct).Sell_CountN))/((tvol)/(tno))) >= 0.9

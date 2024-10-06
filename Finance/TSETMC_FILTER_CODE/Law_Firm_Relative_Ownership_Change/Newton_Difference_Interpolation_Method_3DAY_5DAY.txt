@@ -1,0 +1,39 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var INTERPOLATION_3DAY = function(t){
+// three days price pride
+// Quadratic Equation
+var df01,df02,df03,f;
+df01 = [ih][2].PClosing - [ih][3].PClosing;
+df02 = [ih][1].PClosing - [ih][2].PClosing;
+df03 = df02-df01;
+f = [ih][3].PClosing + 4*df01 + 2*df03;
+return f;
+};
+var INTERPOLATION_5DAY = function(t){
+// five days price pride
+// Quartic Equation
+var df01,df02,df03,df04,df05,df06,df07,df08,df09,df10,f;
+df01 = [ih][4].PClosing - [ih][5].PClosing;
+df02 = [ih][3].PClosing - [ih][4].PClosing;
+df03 = [ih][2].PClosing - [ih][3].PClosing;
+df04 = [ih][1].PClosing - [ih][2].PClosing;
+
+df05 = df02-df01;
+df06 = df03-df02;
+df07 = df04-df03;
+
+df08 = df06-df05;
+df09 = df07-df06;
+
+df10 = df09-df08;
+f = [ih][5].PClosing + 6*df01 + 15*df05 +  20*df08 + 15*df10;
+return f;
+};
+if (INTERPOLATION_3DAY() == [ih][0].PClosing && INTERPOLATION_5DAY() == [ih][0].PClosing){
+return true;
+}
+else{
+return false;
+}  
+}()
