@@ -1,0 +1,15 @@
+true==function(){
+// written by salar.d.ghashghaei@gmail.com
+        var Target_Heikin_Ashi_Percent = 0.05;
+        var Heikin_Ashi_Percent=function(){
+        var i,HAopen=0,HAclose=0,A;
+        for(i=59;i>=0;i--){
+        HAopen = (HAopen + HAclose)/2;
+        HAclose = ([ih][i].PriceMin+ [ih][i].PriceMax+ [ih][i].PriceFirst+ [ih][i].PDrCotVal)/4;
+        }
+        A = (HAclose-HAopen)/HAopen;
+       return A;
+        };
+        if(Heikin_Ashi_Percent() >= Target_Heikin_Ashi_Percent){return true;}
+        else{return false;} 
+}()

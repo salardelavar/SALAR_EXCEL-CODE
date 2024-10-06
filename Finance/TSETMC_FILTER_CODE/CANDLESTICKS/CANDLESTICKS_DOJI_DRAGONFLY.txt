@@ -1,0 +1,14 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// for exact doji, DIFF must equal zero
+        var PERIOD = 0;// day num
+        var PRICE_PERCENT_MIN = 0;// percent
+        var PRICE_PERCENT_MAX = 1;// percent -> 1: because of dragonfly doji
+        var DIFF = ([ih][PERIOD].PDrCotVal - [ih][PERIOD].PriceFirst) / ([ih][PERIOD].PriceMax - [ih][PERIOD].PriceMin);
+        //var DIFF = (pl-pf)/(pmax-pmin);//today
+        if (DIFF >= PRICE_PERCENT_MIN && DIFF <= PRICE_PERCENT_MAX){
+        if ((plp) >= 0)//for positive percent
+        return true;
+        }
+        else{return false;}  
+}()

@@ -1,0 +1,32 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 5;// define 5 for week - 22 for month
+var PRICE_PERCENT_MIN = .1;// must be positive percent and less than .5
+var PRICE_PERCENT_MAX = .25;// must be positive percent and less than .5
+        var MIN=function(t){
+        var min,i;
+        min =[ih][0].PriceMin;
+        for(i=1;i<t;i++){
+        if (min > [ih][i].PriceMin)
+        min = [ih][i].PriceMin;
+        }
+       return min;
+    };
+        var MAX=function(t){
+        var max,i;
+        max = [ih][0].PriceMax;
+        for(i=1;i<t;i++){
+        if (max < [ih][i].PriceMax)
+        max = [ih][i].PriceMax;
+        }
+       return max;
+    };
+        var MID = (MAX(PERIOD) + MIN(PERIOD))/2;
+        var DIFF = ([ih][0].PDrCotVal - [ih][PERIOD-1].PriceFirst)/(MAX(PERIOD) - MIN(PERIOD));
+        if (DIFF >= 0){//for inverted hammer
+        if ([ih][PERIOD-1].PriceFirst < MID && [ih][0].PDrCotVal < MID)//for inverted hammer
+        if (DIFF <= PRICE_PERCENT_MAX && DIFF >= PRICE_PERCENT_MIN)
+        return true;
+        }
+        else{return false;}  
+}()

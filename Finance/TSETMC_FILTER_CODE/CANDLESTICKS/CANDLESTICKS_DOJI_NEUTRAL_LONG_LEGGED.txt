@@ -1,0 +1,11 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+        var PERIOD = 0;// day num
+        var DIFF = (([ih][PERIOD].PriceMax - [ih][PERIOD].PriceMin)/[ih][PERIOD].PriceMin);
+        var  MID = ([ih][PERIOD].PriceMax - [ih][PERIOD].PriceMin)/2;
+        if (MID == [ih][PERIOD].PriceFirst && MID == [ih][PERIOD].PDrCotVal){
+        if (DIFF >= 0.05)// percent long legged doji
+        return true;
+        }
+        else{return false;}
+}()

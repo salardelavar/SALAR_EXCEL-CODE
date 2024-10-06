@@ -1,0 +1,11 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+        var PERIOD = 0;// day num
+        var PRICE_RATIO = 1;// ratio
+        var DIFF = ([ih][PERIOD].PDrCotVal / [ih][PERIOD].PriceFirst) / ([ih][PERIOD].PriceMax / [ih][PERIOD].PriceMin);
+        if (DIFF == PRICE_RATIO){
+        if ((pcp) < 0)//for negative percent
+        return true;
+        }
+        else{return false;} 
+}()

@@ -1,0 +1,7 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+        var PERIOD = 0;// day num
+        var  MID = ([ih][PERIOD].PriceMax - [ih][PERIOD].PriceMin)/2;
+        if (MID == [ih][PERIOD].PriceFirst && MID == [ih][PERIOD].PDrCotVal){return true;}
+        else{return false;}
+}()
