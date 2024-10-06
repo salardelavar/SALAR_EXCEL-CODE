@@ -1,0 +1,33 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 60;// day num
+var SD_PERCENT_MIN = -0.1;
+var SD_PERCENT_MAX = 0;
+var PRICE_NOW = [ih][0].PClosing; 
+var AVERAGE=function(t){
+        var i,Average,sumVAL=0,sumVOL=0,i;
+        for(i=0;i<t;i++)
+         sumVAL += [ih][i].QTotCap;//VALUE
+         for(i=0;i<t;i++)
+         sumVOL += [ih][i].QTotTran5J;//VOLUME
+         Average = sumVAL/sumVOL;
+         return Average;
+};
+var STANDARD_DEVIATION=function(t){
+        var aveP,sumVOL=0,sumVAL=0,sum,i;
+        for(i=0;i<t;i++)
+        sumVAL += [ih][i].QTotCap;//VALUE
+        for(i=0;i<t;i++)
+        sumVOL += [ih][i].QTotTran5J;//VOLUME
+        aveP = sumVAL/sumVOL;
+        sum = 0;
+        for(i=0;i<t;i++)
+        sum += (([ih][i].PClosing - aveP)*([ih][i].PClosing - aveP));
+        return (Math.sqrt(sum/t));
+};
+       var BOT = AVERAGE(PERIOD) - STANDARD_DEVIATION(PERIOD);
+       var TOP = AVERAGE(PERIOD) + STANDARD_DEVIATION(PERIOD);
+       var DEFF = (PRICE_NOW-BOT)/(TOP-BOT);
+        if(DEFF >= SD_PERCENT_MIN && DEFF <= SD_PERCENT_MAX){return true;}
+        else{return false;}    
+}()

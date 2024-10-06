@@ -1,0 +1,41 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 14;// day num
+var COV_MIN = 30;
+var COV_MAX = 40;
+var AveP,AveN,CovP,CovN;
+var VALUE_Ave=function(t,AveP,AveN){
+        var sumP=0,sumN=0,i,a;
+        for(i=0;i<t;i++){
+        a = ([ih][i].QTotCap/[ih][i+1].QTotCap)-1;
+        if(a>=0)
+        sumP += a;
+        if(a<0)
+        sumN += a;
+}
+           AveP = sumP/t;
+           AveN = sumN/t;
+        return 0;
+};
+var STANDARD_DEVIATION=function(t,stdP,stdN){
+        var sumP=0,sumN=0,i;
+        var Ave = VALUE_Ave(t,AveP,AveN);
+        for(i=0;i<t;i++){
+        a = ([ih][i].QTotCap/[ih][i+1].QTotCap)-1;
+        if(a>=0)
+        sumP += (([ih][i].QTotCap - Ave)*([ih][i].QTotCap - Ave));
+        if(a<0)
+        sumN += (([ih][i].QTotCap - Ave)*([ih][i].QTotCap - Ave));
+}
+        
+        stdP = Math.sqrt(sumP/t);
+        stdN = Math.sqrt(sumN/t);
+        return 0;
+};
+       var COV = STANDARD_DEVIATION(t,CovP,CovN);
+       var CovP = stdP/AveP;
+       var CovN = stdN/AveN;
+       var R_COV = 100*(CovP/(CovP+CovN));
+        if(R_COV >= COV_MIN && R_COV <= COV_MAX){return true;}
+        else{return false;}    
+}()

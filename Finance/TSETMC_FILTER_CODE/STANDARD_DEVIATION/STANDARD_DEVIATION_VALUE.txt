@@ -1,0 +1,26 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 45;// day num
+var SD_PERCENT_MIN = -0.45;
+var SD_PERCENT_MAX = -0.40;
+var AVERAGE=function(t){
+        var Average,sum=0,i;
+        for(i=0;i<t;i++)
+        sum += [ih][i].QTotCap;
+        Average = sum/t;
+        return Average;
+};
+var STANDARD_DEVIATION=function(t){
+        var A,sum=0,i;
+        var Ave = AVERAGE(t);
+        for(i=0;i<t;i++)
+        sum += (([ih][i].QTotCap - Ave)*([ih][i].QTotCap - Ave));
+        A = Math.sqrt(sum/t);
+        return A;
+};
+       var BOT = AVERAGE(PERIOD) - STANDARD_DEVIATION(PERIOD);
+       var TOP = AVERAGE(PERIOD) + STANDARD_DEVIATION(PERIOD);
+       var DEFF = (VALUE_NOW-BOT)/(TOP-BOT);
+        if(DEFF >= SD_PERCENT_MIN && DEFF <= SD_PERCENT_MAX){return true;}
+        else{return false;}    
+}()
