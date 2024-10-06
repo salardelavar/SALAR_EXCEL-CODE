@@ -1,0 +1,32 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var period_SMA = 9;// day num
+var period_EMA = 9;// day num
+var PERCENT_MIN = .005;//percent
+var PERCENT_MAX = .01;//percent
+var sma = function(t){
+var sm = 0;
+for (var i=0;i<t;i++){
+sm = sm +[ih][i].PClosing;
+}
+sm = sm / t;
+return sm;
+};
+var ema = function(t){
+var sm = 0,em = 0;
+for (var i=0;i<t;i++){
+sm = sm +[ih][i].PClosing;
+}
+sm = sm / t;
+em = sm + (2/(t+1))*([ih][0].PClosing - sm);
+return em;
+};
+var DIFF = (ema(period_EMA) - sma(period_SMA))/sma(period_SMA);
+if ((sma(period_SMA) - ema(period_EMA)) >= 0){
+if (Math.abs(DIFF) >= PERCENT_MIN && Math.abs(DIFF) <= PERCENT_MAX)
+return true;
+}
+else{
+return false;
+}
+}()

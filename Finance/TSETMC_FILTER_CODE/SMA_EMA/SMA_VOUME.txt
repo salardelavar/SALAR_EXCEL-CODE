@@ -1,0 +1,18 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 20;// day num
+var VOL_NOW = (tvol);
+var VOLUME_PERCENT_MIN = 0;// percent
+var VOLUME_PERCENT_MAX = .5;// percent
+         var VOL_AVERAGE=function(t){
+        var Average,sum=0,i;
+        for(i=0;i<t;i++){
+         sum = sum + [ih][i].QTotTran5J;
+        }
+        Average = sum / t;
+       return Average;
+    };
+var DIFF = ((VOL_NOW - VOL_AVERAGE(PERIOD))/VOL_AVERAGE(PERIOD));
+if (DIFF >= VOLUME_PERCENT_MIN && DIFF <= VOLUME_PERCENT_MAX){return true;}
+else{return false;}  
+}()

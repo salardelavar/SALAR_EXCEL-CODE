@@ -1,0 +1,24 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 60;// day num
+var ROC_PERCENT_MIN = 0.9;// Rate of change
+var ROC_PERCENT_MAX = 1.2;// Rate of change
+var PA_PERCENT_MIN = .1;
+var PA_PERCENT_MAX = .5;
+var PRICE_NOW = (pc);//[ih][0].PClosing; 
+    var PRICE_AVERAGE=function(t){
+        var i,Average,sumVAL=0,sumVOL=0;
+        for(i=0;i<t;i++){
+         sumVAL += [ih][i].QTotCap;
+         sumVOL += [ih][i].QTotTran5J;
+        }
+        Average = sumVAL/sumVOL;
+       return Average;
+    }; 
+var DEFF01 = (PRICE_NOW-PRICE_AVERAGE(PERIOD))/PRICE_AVERAGE(PERIOD);
+var DEFF02 = ([ih][PERIOD-1].PClosing-[ih][0].PClosing)/[ih][PERIOD-1].PClosing;// [PERIOD-1] must be less than 60
+if(DEFF01 >= PA_PERCENT_MIN && DEFF01 <= PA_PERCENT_MAX){
+if(DEFF02 >= ROC_PERCENT_MIN && DEFF02 <= ROC_PERCENT_MAX)
+return true;}
+else{return false;}    
+}()
