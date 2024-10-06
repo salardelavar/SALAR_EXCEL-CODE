@@ -1,0 +1,38 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 60;// day num
+var DivP=PERIOD/6;  
+        var MIN=function(tmin,tmax){
+        var min,i;
+        min = [ih][tmin].PClosing;
+        for(i=tmin+1;i<tmax;i++){
+        if (min > [ih][i].PClosing)
+        min = [ih][i].PClosing;
+        }
+        return min;
+        };
+        var MAX=function(tmin,tmax){
+        var max,i;
+        max = [ih][tmin].PClosing;
+        for(i=tmin+1;i<tmax;i++){
+        if (max < [ih][i].PClosing)
+        max = [ih][i].PClosing;
+        }
+        return max;
+        }; 
+        var node_01 = MIN(0,DivP);
+        var node_02 = MAX(DivP,2*DivP);
+        var node_03 = MIN(2*DivP,3*DivP);
+        var node_04 = MAX(3*DivP,4*DivP);
+        var node_05 = MIN(4*DivP,5*DivP);
+        var node_06 = MAX(5*DivP,6*DivP);
+        if(node_01 > Math.max(node_03,node_05)){
+        if(node_02 < Math.min(node_04,node_06))
+        if(node_03 < Math.min(node_02,node_04))
+        if(node_05 < Math.min(node_04,node_06))
+        if(node_03 > node_05)
+        if(node_04 < node_06)
+        return true;
+        }
+        else{return false;}  
+}()

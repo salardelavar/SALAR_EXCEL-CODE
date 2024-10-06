@@ -1,0 +1,50 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 60;// day num
+var ZONE_PERCENT = .01;// must be abs value
+var H_PERCENT_MIN = .15;// must be abs value
+var DivP=PERIOD/5;  
+        var MIN=function(tmin,tmax){
+        var min,i;
+        min = [ih][tmin].PClosing;
+        for(i=tmin+1;i<tmax;i++){
+        if (min > [ih][i].PClosing)
+        min = [ih][i].PClosing;
+        }
+        return min;
+        };
+        var MAX=function(tmin,tmax){
+        var max,i;
+        max = [ih][tmin].PClosing;
+        for(i=tmin+1;i<tmax;i++){
+        if (max < [ih][i].PClosing)
+        max = [ih][i].PClosing;
+        }
+        return max;
+        };
+        var node_01 = MIN(0,DivP);
+        var node_02 = MAX(DivP,2*DivP);
+        var node_03 = MIN(2*DivP,3*DivP);
+        var node_04 = MAX(3*DivP,4*DivP);
+        var node_05 = MIN(4*DivP,5*DivP);
+        var BOT01 = node_01 - ZONE_PERCENT*node_01;
+        var TOP01 = node_01 + ZONE_PERCENT*node_01;
+        var BOT02 = node_02 - ZONE_PERCENT*node_02;
+        var TOP02 = node_02 + ZONE_PERCENT*node_02;
+        var h = node_01 + node_01*H_PERCENT_MIN;
+        if(node_02 > node_01){
+        if(node_02 > node_03)
+        if(node_04 > node_01)
+        if(node_04 > node_03)
+        if((node_02-node_01) >= h)
+        if((node_02-node_03) >= h)
+        if((node_04-node_03) >= h)
+        if((node_04-node_05) >= h)
+        if(node_03 >= BOT01 && node_03 <= TOP01)// for check perfect shape
+        if(node_04 >= BOT02 && node_04 <= TOP02)// for check perfect shape
+        return true;
+        }
+        else{
+        return false;
+        }  
+}()
