@@ -1,0 +1,29 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 60;// day num
+var P_TARGET = [ih][0].PClosing;//[ih][0].PDrCotVal
+var LR_PERCENT_MIN = -0.05;// percentage ratio
+var LR_PERCENT_MAX = 0;// percentage ratio
+// Lr_Line = a1 * t + a0
+var LINEAR_REGRESSION = function(t){
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var a1,a0,P,LR;
+        for(var i=0;i<t;i++){
+            P = [ih][i].PClosing;//[ih][i].PDrCotVal
+            sum_x += 1;
+            sum_y += P;
+            sum_xy += sum_x*P;
+            sum_xx += sum_x*sum_x;
+        } 
+        a1 = (t*sum_xy - sum_x * sum_y) / (t*sum_xx - sum_x * sum_x);
+        a0 = (sum_y * sum_xx - sum_x * sum_xy)/(t*sum_xx - sum_x * sum_x);
+        LR = a0 + a1*t;
+        return LR;
+};
+var DEFF = (P_TARGET - LINEAR_REGRESSION(PERIOD)) / LINEAR_REGRESSION(PERIOD);
+if (DEFF >= LR_PERCENT_MIN && DEFF <= LR_PERCENT_MAX) {return true;}
+else {return false;}
+}()

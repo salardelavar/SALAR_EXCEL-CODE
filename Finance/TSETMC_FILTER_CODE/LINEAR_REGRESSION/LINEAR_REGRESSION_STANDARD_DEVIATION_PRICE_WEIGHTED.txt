@@ -1,0 +1,61 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 60;// day num
+var P_TARGET = [ih][0].PClosing;//Price
+var LRSD_PERCENT_MIN = -0.1;// percentage ratio
+var LRSD_PERCENT_MAX = 0.0;// percentage ratio
+var TOP,BOT,DEFF; 
+// Lr_Line = a1 * t + a0
+var LINEAR_REGRESSION = function(t){
+        var i,V,aveVOL,a0,a1;
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var sumVOL = 0;
+        for(i=0;i<t;i++)
+        sumVOL += [ih][i].QTotTran5J;
+        aveVOL =sumVOL/t;
+        for(i=0;i<t;i++){
+            V = [ih][i].QTotCap;
+            sum_x += 1;
+            sum_y += V;
+            sum_xy += sum_x*V;
+            sum_xx += sum_x*sum_x;
+        } 
+        a1 = (t*sum_xy - sum_x*sum_y)/(t*sum_xx - sum_x*sum_x)/aveVOL;
+        a0 = (sum_y*sum_xx - sum_x*sum_xy)/(t*sum_xx - sum_x*sum_x)/aveVOL;
+        return a0;
+};
+var STANDARD_DEVIATION=function(t){
+        var i,A,sum=0,V,AVE,aveVOL,a0,a1;
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var sumVOL = 0;
+        for(i=0;i<t;i++)
+        sumVOL += [ih][i].QTotTran5J;
+        aveVOL = sumVOL/t;
+        for(i=0;i<t;i++){
+            V = [ih][i].QTotCap;
+            sum_x += 1;
+            sum_y += V;
+            sum_xy += sum_x*V;
+            sum_xx += sum_x*sum_x;
+        } 
+        a1 = (t*sum_xy - sum_x*sum_y)/(t*sum_xx - sum_x*sum_x)/aveVOL;
+        a0 = (sum_y*sum_xx - sum_x*sum_xy)/(t*sum_xx - sum_x*sum_x)/aveVOL;
+        for(i=0;i<t;i++){
+        AVE = a1 * t + a0;
+         sum += (([ih][i].PClosing - AVE)*([ih][i].PClosing - AVE));
+        }
+        A = Math.sqrt(sum/t);
+       return A;
+};
+       BOT = LINEAR_REGRESSION(PERIOD) - STANDARD_DEVIATION(PERIOD);
+       TOP = LINEAR_REGRESSION(PERIOD) + STANDARD_DEVIATION(PERIOD);
+       DEFF = (P_TARGET-BOT)/(TOP-BOT);
+if (DEFF >= LRSD_PERCENT_MIN && DEFF <= LRSD_PERCENT_MAX) {return true;}
+else {return false;}
+}()

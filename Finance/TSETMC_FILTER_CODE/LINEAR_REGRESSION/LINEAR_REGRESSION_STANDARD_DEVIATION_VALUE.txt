@@ -1,0 +1,53 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 60;// day num
+var VALUE_NOW = [ih][0].QTotCap;
+var LRSD_PERCENT_MIN = -0.2;// percentage ratio
+var LRSD_PERCENT_MAX =  0.0;// percentage ratio
+var TOP,BOT,DEFF; 
+// Lr_Line = a1 * t + a0
+var LINEAR_REGRESSION = function(t){
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var V,a0,a1;
+        for(var i=0;i<t;i++){
+            V = [ih][i].QTotCap;
+            sum_x += 1;
+            sum_y += V;
+            sum_xy += sum_x*V;
+            sum_xx += sum_x*sum_x;
+        } 
+        a1 = (t*sum_xy - sum_x*sum_y) / (t*sum_xx - sum_x*sum_x);
+        a0 = (sum_y*sum_xx - sum_x*sum_xy)/(t*sum_xx - sum_x*sum_x);
+        return a0;
+};
+        var STANDARD_DEVIATION=function(t){
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var A,i,V,AVE,a0,a1,sum=0;
+        for(i=0;i<t;i++){
+            V = [ih][i].QTotCap;
+            sum_x += 1;
+            sum_y += V;
+            sum_xy += sum_x*V;
+            sum_xx += sum_x*sum_x;
+        } 
+        a1 = (t*sum_xy - sum_x*sum_y) / (t*sum_xx - sum_x*sum_x);
+        a0 = (sum_y*sum_xx - sum_x*sum_xy)/(t*sum_xx - sum_x*sum_x);
+        for(i=0;i<t;i++){
+         AVE = a1 * t + a0;
+         sum += (([ih][i].QTotCap - AVE)*([ih][i].QTotCap - AVE));
+        }
+        A = Math.sqrt(sum/t);
+       return A;
+    };
+       BOT = LINEAR_REGRESSION(PERIOD) - STANDARD_DEVIATION(PERIOD);
+       TOP = LINEAR_REGRESSION(PERIOD) + STANDARD_DEVIATION(PERIOD);
+       DEFF = (VALUE_NOW-BOT)/(TOP-BOT);
+if (DEFF >= LRSD_PERCENT_MIN && DEFF <= LRSD_PERCENT_MAX) {return true;}
+else {return false;}
+}()
