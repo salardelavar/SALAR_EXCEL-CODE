@@ -1,0 +1,83 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var CC01_MIN = .8;//percent for index 1
+var CC01_MAX = .9;//percent for index 1
+var CC02_MIN = .1;//percent for index 2
+var CC02_MAX = .2;//percent for index 2
+var CC01 = function(){
+//index 1 percent
+var I01 = .0128;//week volatility percentage
+var I02 = .0141;
+var I03 = .0031;
+var I04 = .0056;
+var I05 = .0154;
+var I06 = -.0022;
+var I07 = .0048;
+var I08 = .0249;
+var I09 = .0030;
+var I10 = .0129;
+var I11 = .0030;
+var I12 = .0129;
+//price percent
+var P01 = ([ih][59].PDrCotVal/[ih][55].PriceFirst)-1;
+var P02 = ([ih][54].PDrCotVal/[ih][50].PriceFirst)-1;
+var P03 = ([ih][49].PDrCotVal/[ih][45].PriceFirst)-1;
+var P04 = ([ih][44].PDrCotVal/[ih][40].PriceFirst)-1;
+var P05 = ([ih][39].PDrCotVal/[ih][35].PriceFirst)-1;
+var P06 = ([ih][34].PDrCotVal/[ih][30].PriceFirst)-1;
+var P07 = ([ih][29].PDrCotVal/[ih][25].PriceFirst)-1;
+var P08 = ([ih][24].PDrCotVal/[ih][20].PriceFirst)-1;
+var P09 = ([ih][19].PDrCotVal/[ih][15].PriceFirst)-1;
+var P10 = ([ih][14].PDrCotVal/[ih][10].PriceFirst)-1;
+var P11 = ([ih][9].PDrCotVal/[ih][5].PriceFirst)-1;
+var P12 = ([ih][4].PDrCotVal/[ih][0].PriceFirst)-1;
+var SUM_I = I01+I02+I03+I04+I05+I06+I07+I08+I09+I10+I11+I12;
+var SUM_II = I01*I01+I02*I02+I03*I03+I04*I04+I05*I05+I06*I06+I07*I07+I08*I08+I09*I09+I10*I10+I11*I11+I12*I12;
+var SUM_P = P01+P02+P03+P04+P05+P06+P07+P08+P09+P10+P11+P12;
+var SUM_PP = P01*P01+P02*P02+P03*P03+P04*P04+P05*P05+P06*P06+P07*P07+P08*P08+P09*P09+P10*P10+P11*P11+P12*P12;
+var SUM_IP = I01*P01+I02*P02+I03*P03+I04*P04+I05*P05+I06*P06+I07*P07+I08*P08+I09*P09+I10*P10+I11*P11+I12*P12;
+var CCE = (SUM_IP-(SUM_I*SUM_P/12))/Math.sqrt((SUM_II-(SUM_I*SUM_I/12))*(SUM_PP-(SUM_P*SUM_P/12)));
+return CCE;
+};
+var CC02 = function(){
+//index 2 percent
+var I01 = .0128;//week volatility percentage
+var I02 = .0141;
+var I03 = .0031;
+var I04 = .0056;
+var I05 = .0154;
+var I06 = -.0022;
+var I07 = .0048;
+var I08 = .0249;
+var I09 = .0030;
+var I10 = .0129;
+var I11 = .0030;
+var I12 = .0129;
+//price percent
+var P01 = ([ih][59].PDrCotVal/[ih][55].PriceFirst)-1;
+var P02 = ([ih][54].PDrCotVal/[ih][50].PriceFirst)-1;
+var P03 = ([ih][49].PDrCotVal/[ih][45].PriceFirst)-1;
+var P04 = ([ih][44].PDrCotVal/[ih][40].PriceFirst)-1;
+var P05 = ([ih][39].PDrCotVal/[ih][35].PriceFirst)-1;
+var P06 = ([ih][34].PDrCotVal/[ih][30].PriceFirst)-1;
+var P07 = ([ih][29].PDrCotVal/[ih][25].PriceFirst)-1;
+var P08 = ([ih][24].PDrCotVal/[ih][20].PriceFirst)-1;
+var P09 = ([ih][19].PDrCotVal/[ih][15].PriceFirst)-1;
+var P10 = ([ih][14].PDrCotVal/[ih][10].PriceFirst)-1;
+var P11 = ([ih][9].PDrCotVal/[ih][5].PriceFirst)-1;
+var P12 = ([ih][4].PDrCotVal/[ih][0].PriceFirst)-1;
+var SUM_I = I01+I02+I03+I04+I05+I06+I07+I08+I09+I10+I11+I12;
+var SUM_II = I01*I01+I02*I02+I03*I03+I04*I04+I05*I05+I06*I06+I07*I07+I08*I08+I09*I09+I10*I10+I11*I11+I12*I12;
+var SUM_P = P01+P02+P03+P04+P05+P06+P07+P08+P09+P10+P11+P12;
+var SUM_PP = P01*P01+P02*P02+P03*P03+P04*P04+P05*P05+P06*P06+P07*P07+P08*P08+P09*P09+P10*P10+P11*P11+P12*P12;
+var SUM_IP = I01*P01+I02*P02+I03*P03+I04*P04+I05*P05+I06*P06+I07*P07+I08*P08+I09*P09+I10*P10+I11*P11+I12*P12;
+var CCE = (SUM_IP-(SUM_I*SUM_P/12))/Math.sqrt((SUM_II-(SUM_I*SUM_I/12))*(SUM_PP-(SUM_P*SUM_P/12)));
+return CCE;
+};
+var DIFF01 = CC01();
+var DIFF02 = CC02();
+if (DIFF01 >= CC01_MIN && DIFF01 <= CC01_MAX){
+if (DIFF02 >= CC02_MIN && DIFF02 <= CC02_MAX)
+return true;}
+else{return false;}
+}()

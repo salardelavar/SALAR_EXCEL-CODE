@@ -1,0 +1,39 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var ALFA_MIN = .9;//percent
+var ALFA_MAX = 1.5;//percent
+var ALFA = function(){
+//index volatility percentage
+var I01 = .0128;
+var I02 = .0141;
+var I03 = .0031;
+var I04 = .0056;
+var I05 = .0154;
+var I06 = -.0022;
+var I07 = .0048;
+var I08 = .0249;
+var I09 = .0030;
+var I10 = .0129;
+//price volatility percentage
+var P01 = ([ih][9].PDrCotVal/[ih][9].PriceFirst)-1;
+var P02 = ([ih][8].PDrCotVal/[ih][8].PriceFirst)-1;
+var P03 = ([ih][7].PDrCotVal/[ih][7].PriceFirst)-1;
+var P04 = ([ih][6].PDrCotVal/[ih][6].PriceFirst)-1;
+var P05 = ([ih][5].PDrCotVal/[ih][5].PriceFirst)-1;
+var P06 = ([ih][4].PDrCotVal/[ih][4].PriceFirst)-1;
+var P07 = ([ih][3].PDrCotVal/[ih][3].PriceFirst)-1;
+var P08 = ([ih][2].PDrCotVal/[ih][2].PriceFirst)-1;
+var P09 = ([ih][1].PDrCotVal/[ih][1].PriceFirst)-1;
+var P10 = ([ih][0].PDrCotVal/[ih][0].PriceFirst)-1;
+var SUM_I = I01+I02+I03+I04+I05+I06+I07+I08+I09+I10;
+var SUM_II = I01*I01+I02*I02+I03*I03+I04*I04+I05*I05+I06*I06+I07*I07+I08*I08+I09*I09+I10*I10;
+var SUM_P = P01+P02+P03+P04+P05+P06+P07+P08+P09+P10;
+var SUM_IP = I01*P01+I02*P02+I03*P03+I04*P04+I05*P05+I06*P06+I07*P07+I08*P08+I09*P09+I10*P10;
+var b = (SUM_IP-(SUM_I*SUM_P/10))/(SUM_II-(SUM_I*SUM_I/10));
+var a = (SUM_P/10)-b*(SUM_I/10);
+return a;
+};
+var DIFF = ALFA();
+if (DIFF >= ALFA_MIN && DIFF <= ALFA_MAX){return true;}
+else{return false;}
+}()
