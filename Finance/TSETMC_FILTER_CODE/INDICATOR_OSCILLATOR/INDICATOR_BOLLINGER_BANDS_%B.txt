@@ -1,0 +1,32 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 20;// day num
+var Multi = 2;// abs value
+var BO_PERCENT_MIN = 0;// between 0 until 1
+var BO_PERCENT_MAX = .05;// between 0 until 1
+        var AVERAGE=function(t){
+        var Average,sum=0,i;
+        for(i=0;i<t;i++){
+        sum += [ih][i].PDrCotVal;//[ih][i].PClosing
+        }
+        Average = sum/t;
+       return Average;
+    };
+        var SD=function(t){//Standard Deviation
+        var A,sum=0,i;
+        for(i=0;i<t;i++){
+        sum += [ih][i].PDrCotVal;//[ih][i].PClosing
+        }
+        A = sum/t;sum=0;
+        for(i=0;i<t;i++){
+         sum += ([ih][i].PDrCotVal - A)*([ih][i].PDrCotVal - A);//[ih][i].PClosing
+        }
+        A = Math.sqrt(sum/t);
+       return A;
+    };
+var BOT = AVERAGE(PERIOD) - Multi*SD(PERIOD);
+var TOP = AVERAGE(PERIOD) + Multi*SD(PERIOD);
+var DIFF = (((pl)-BOT)/(TOP-BOT));//(pc)
+if(DIFF >= BO_PERCENT_MIN && DIFF <= BO_PERCENT_MAX){return true;}
+else{return false;}    
+}()

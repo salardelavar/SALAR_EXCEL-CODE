@@ -1,0 +1,13 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// for exact doji, DIFF must equal zero
+        var PERIOD = 0;// day num
+        var PRICE_PERCENT_MIN = 0;// percent
+        var PRICE_PERCENT_MAX = .01;// percent
+        var DIFF = ([ih][PERIOD].PDrCotVal - [ih][PERIOD].PriceFirst) / ([ih][PERIOD].PriceMax - [ih][PERIOD].PriceMin);
+        if (DIFF <= PRICE_PERCENT_MAX && DIFF >= PRICE_PERCENT_MIN){
+        //if ((pcp) <= 0)//for negative percent
+        return true;
+        }
+        else{return false;}  
+}()

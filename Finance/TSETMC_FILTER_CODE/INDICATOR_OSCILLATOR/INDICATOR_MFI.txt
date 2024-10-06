@@ -1,0 +1,22 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 14;// rsi day num
+var MFI_MIN = 30; // percent
+var MFI_MAX = 35;// percent
+var MFI=function(t){
+var i,mom,mfi,MF1,MF2;
+var PMF=0,NMF=0;
+for(i=0;i<t;i++){
+mom = [ih][i].QTotCap-[ih][i+1].QTotCap;
+if (mom >= 0) 
+PMF += mom;
+if (mom < 0) 
+NMF += -mom;
+}
+mfi=100*PMF/(PMF+NMF);
+return mfi;
+}
+};
+if(MFI(PERIOD) >= MFI_MIN && MFI(PERIOD) <= MFI_MAX){return true;} 
+else{return false;}
+}()

@@ -1,0 +1,21 @@
+true==function(){
+// Written By: salar.d.ghashghaei@gmail.com
+var PERIOD = 20;// cci day num
+var Target_MIN = 0; // percent
+var Target_MAX = 10;// percent
+var i,CCI,MA,MD,a,sum=0;
+for(i=0;i<PERIOD;i++){
+sum += ([ih][i].PriceMax + [ih][i].PDrCotVal + [ih][i].PriceMin)/3;//[ih][i].PClosing
+}
+MA=sum/PERIOD;
+sum=0;
+for(i=0;i<PERIOD;i++){
+a=([ih][i].PriceMax + [ih][i].PDrCotVal + [ih][i].PriceMin)/3;
+sum += Math.abs(a-MA);
+}
+MD=sum/PERIOD;//Mean Deviation
+a=([ih][0].PriceMax + [ih][0].PDrCotVal + [ih][0].PriceMin)/3;//[ih][0].PClosing
+CCI=(a-MA)/(0.015*MD);
+if(CCI > Target_MIN && CCI <= Target_MAX){return true;} 
+else{return false;}
+}()

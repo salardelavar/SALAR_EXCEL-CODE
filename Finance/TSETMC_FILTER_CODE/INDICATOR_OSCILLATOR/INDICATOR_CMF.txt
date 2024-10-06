@@ -1,0 +1,19 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// Chaikin Money Flow Indicator
+var PERIOD = 20;// rsi day num
+var CMF_MIN = .1; // percent
+var CMF_MAX = .15;// percent
+var CMF=function(t){
+var i,CMF,sumVOL=0,sumCMF=0;
+for(i=0;i<t;i++){
+CMF = (([ih][i].PDrCotVal-[ih][i].PriceMin)-([ih][i].PriceMax-[ih][i].PDrCotVal))/([ih][i].PriceMax-[ih][i].PriceMin);
+sumCMF += CMF*[ih][i].QTotTran5J;
+sumVOL += [ih][i].QTotTran5J;
+}
+CMF=sumCMF/sumVOL;
+return cmf;
+};
+if(CMF(PERIOD) >= CMF_MIN && CMF(PERIOD) <= CMF_MAX){return true;} 
+else{return false;}
+}()

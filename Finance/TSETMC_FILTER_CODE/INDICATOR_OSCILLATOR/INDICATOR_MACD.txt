@@ -1,0 +1,35 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD_MIN = 12;// day num
+var PERIOD_MAX = 26;// day num
+var PERCENT_MIN = .005;//percent
+var PERCENT_MAX = .01;//percent
+var SMA = function(t) {
+var i,sm=0;
+for (i=0;i<t; i++) {
+//sm += [ih][i].PClosing;
+sm += [ih][i].PDrCotVal;
+}
+sm = sm / t;
+return sm;
+};
+var EMA = function(t) {
+var i,sm=0,em=0;
+for (i=0;i<t;i++) {
+//sm += [ih][i].PClosing;
+sm += [ih][i].PDrCotVal;
+}
+sm = sm / t;
+//em = sm + (2/(t+1))*([ih][0].PClosing - sm);
+em = sm + (2/(t+1))*([ih][0].PDrCotVal - sm);
+return em;
+};
+var MACD =  EMA(PERIOD_MIN) - EMA(PERIOD_MAX);
+if ( MACD  <= 0){// for negative slope
+if ((Math.abs(MACD)/EMA(PERIOD_MIN)) >= PERCENT_MIN && (Math.abs(MACD)/EMA(PERIOD_MIN)) <= PERCENT_MAX)
+return true;
+}
+else{
+return false;
+}
+}()

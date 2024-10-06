@@ -1,0 +1,14 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 59;// day num - default = less than 60  
+var PVT_MIN = 1e6;// summation of (price percent * volume) in period
+var PVT_MAX = 1e7;// summation of (price percent * volume) in period
+var PVT = function(t){
+var sum = 0;
+for (var i=0;i<t;i++){sum += [ih][i].QTotTran5J*(([ih][i].PDrCotVal-[ih][i+1].PDrCotVal)/[ih][i+1].PDrCotVal);}
+return sum;
+};
+var DIFF = PVT(PERIOD);
+if(DIFF >= PVT_MIN && DIFF <= PVT_MAX){return true;}
+else{return false;}    
+}()

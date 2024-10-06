@@ -1,0 +1,20 @@
+true==function(){//Ultimate Oscillator
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD01 = 7;// default: 7 day 
+var PERIOD02 = 14;// default: 14 day
+var PERIOD03 = 28;// default: 28 day
+var UL_MIN = 50; // percent
+var UL_MAX = 100;// percent
+var UL_OSC = function(t){
+var i,ave,sumBP=0,sumTR=0;
+for(i=0;i<t;i++){
+sumBP += [ih][i].PDrCotVal-Math.min([ih][i].PriceMin,[ih][i+1].PDrCotVal);//Buying Pressure
+sumTR += Math.max([ih][i].PriceMax,[ih][i+1].PDrCotVal)-Math.min([ih][i].PriceMin,[ih][i+1].PDrCotVal);//True Range
+}
+ave = sumBP/sumTR;
+return ave;
+};
+var UL = 100*(4*UL_OSC(PERIOD01)+2*UL_OSC(PERIOD02)+UL_OSC(PERIOD03))/7;
+if(UL >= UL_MIN && UL <= UL_MAX){return true;} 
+else{return false;}
+}()

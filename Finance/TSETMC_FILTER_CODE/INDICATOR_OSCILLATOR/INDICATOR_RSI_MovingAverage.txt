@@ -1,0 +1,34 @@
+true==function(){
+var PERIOD = 14;// rsi day num
+var RSI_MIN = 30; // percent
+var RSI_MAX = 35;// percent
+   var RSI =function(tmin,tmax){
+      var i,mom,Pave,Nave;
+      var Psum=0,Nsum=0,sumVOL=0;
+      for (i=tmin;i<tmax+1;i++){
+     mom = [ih][i].PClosing-[ih][i+1].PClosing;
+     if(mom >= 0)
+     Psum += mom;
+     if(mom < 0)
+     Nsum += -mom;
+      }
+      rsi = 100*Pave/(Pave+Nave);
+     return rsi;
+   };
+   var AVERAGE=function(t){
+        var Average,sum=0,i;
+        for(i=0;i<t;i++){
+        sum += RSI(i,14+i);
+        }
+        Average = sum/t;
+       return Average;
+    };
+      var average = AVERAGE(PERIOD);
+      var a = RSI(0,PERIOD);
+	  if(a >= average && average >= RSI_MIN && average <= RSI_MAX){
+      return true;
+      } 
+      else{
+      return false;
+      }
+}()

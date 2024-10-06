@@ -1,0 +1,56 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// MACD - INPUT DATA
+var PERIOD_MIN = 12;// day num
+var PERIOD_MAX = 26;// day num
+var PERCENT_MIN = .005;//percent
+var PERCENT_MAX = .01;//percent
+/// RSI - INPUT DATA
+var RSI_PERIOD = 5;// rsi day num
+var RSI_MIN = 30; // percent
+var RSI_MAX = 35;// percent
+var SMA = function(t) {
+var i,sm=0;
+for (i=0;i<t; i++) {
+//sm += [ih][i].PClosing;
+sm += [ih][i].PDrCotVal;
+}
+sm = sm / t;
+return sm;
+};
+var EMA = function(t) {
+var i,sm=0,em=0;
+for (i=0;i<t;i++) {
+//sm += [ih][i].PClosing;
+sm += [ih][i].PDrCotVal;
+}
+sm = sm / t;
+//em = sm + (2/(t+1))*([ih][0].PClosing - sm);
+em = sm + (2/(t+1))*([ih][0].PDrCotVal - sm);
+return em;
+};
+var MACD =  EMA(PERIOD_MIN) - EMA(PERIOD_MAX);
+   var RSI =function(t){
+      var i,mom;
+      var Psum=0,Nsum=0;
+      for (i=0;i<t+1;i++){
+     // change = [ih][i].PClosing-[ih][i+1].PClosing;
+     change = [ih][i].PDrCotVal-[ih][i+1].PDrCotVal;
+     if(change >= 0)
+     Psum += mom;
+     if(change < 0)
+     Nsum += -mom;
+      }
+      var Pave=Psum/t;
+      var Nave=Nsum/t;
+     RSIndex = RSIndex = 100*Pave/(Pave+Nave);
+     return RSIndex;
+   };
+if ((Math.abs(MACD)/EMA(PERIOD_MIN)) >= PERCENT_MIN && (Math.abs(MACD)/EMA(PERIOD_MIN)) <= PERCENT_MAX){
+if(RSI(RSI_PERIOD) >= RSI_MIN  && RSI(RSI_PERIOD) <= RSI_MAX)
+return true;
+}
+else{
+return false;
+}
+}()

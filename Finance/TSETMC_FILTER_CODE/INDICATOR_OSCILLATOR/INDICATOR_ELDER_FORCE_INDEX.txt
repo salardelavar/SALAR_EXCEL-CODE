@@ -1,0 +1,21 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// for better grab, recommended, period to be 5
+var PERIOD = 13;// day num - default = 13 
+var EFI_MIN = -1e+7;// price x volume
+var EFI_MAX = 0;// price x volume
+var EMA_EFI = function(t) {
+var i,sm = 0,em = 0;
+for (i = t; i >= 0; i--) {
+//sm = sm + ([ih][i].PDrCotVal - [ih][i+1].PDrCotVal)*[ih][i].QTotTran5J;// default
+sm = sm + ([ih][i].PClosing - [ih][i+1].PClosing)*[ih][i].QTotTran5J;
+}
+sm = sm / t;
+//em = sm + (2/(period+1))*((([ih][0].PDrCotVal - [ih][1].PDrCotVal)*[ih][0].QTotTran5J) - sm);// default
+em = sm + (2/(t+1))*((([ih][0].PClosing - [ih][1].PClosing)*[ih][0].QTotTran5J) - sm);
+return em;
+};
+var DIFF = EMA_EFI(PERIOD);
+if(DIFF <= EFI_MAX && DIFF >= EFI_MIN){return true;}
+else{return false;}    
+}()

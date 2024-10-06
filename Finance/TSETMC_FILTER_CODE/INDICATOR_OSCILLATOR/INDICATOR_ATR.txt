@@ -1,0 +1,16 @@
+true==function(){//Average True Range
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 14;// cci day num
+var ATR_MIN = 0; // value
+var ATR_MAX = 10000;// value
+var i,A,B,C,ATR,sumTR=0;
+for(i=0;i<PERIOD;i++){
+A = [ih][i].PriceMax-[ih][i].PriceMin;
+B = Math.abs([ih][i].PriceMax-[ih][i+1].PDrCotVal);
+C = Math.abs([ih][i].PriceMin-[ih][i+1].PDrCotVal);
+sumTR += Math.max(A,B,C);
+}
+ATR=sumTR/PERIOD;
+if(ATR > ATR_MIN && ATR <= ATR_MAX){return true;} 
+else{return false;}
+}()

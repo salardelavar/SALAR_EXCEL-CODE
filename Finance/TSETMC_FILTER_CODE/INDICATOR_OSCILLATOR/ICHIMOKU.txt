@@ -1,0 +1,33 @@
+  true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// Tenkan Sen and Kijun Sen
+// taghir ravand az nozoli be silodi
+var PERIOD_MIN = 9;// day num
+var PERIOD_MAX = 26;// day num
+var DIFF = 5;// Percent
+var PRICE_NOW = [ih][0].PClosing;
+        var MAX=function(t){
+        var max,i;
+        max = [ih][0].PriceMax;
+        for(i=1;i<t;i++){
+        if (max < [ih][i].PriceMax)
+        max = [ih][i].PriceMax;
+        }
+       return max;
+    };
+        var MIN = function(t){
+        var min,i;
+        min = [ih][0].PriceMin;
+        for(i=1;i<t;i++){
+        if (min > [ih][i].PriceMin)
+        min = [ih][i].PriceMin;
+        }
+        return min;
+        };
+        var DIFF01 = (MAX(PERIOD_MIN)+MIN(PERIOD_MIN))*0.5;//Tenkan Sen
+        var DIFF02 = (MAX(PERIOD_MAX)+MIN(PERIOD_MAX))*0.5;//Kijun Sen
+        var DIFF03 = (DIFF01+DIFF02)*0.5;//Average of Tenkan Sen and Kijun Sen
+        var DIFF04 = ((DIFF03/PRICE_NOW)-1)*100;//Difference 
+        if(DIFF04 >= DIFF && DIFF04 <= DIFF){return true;}
+        else{return false;}  
+}()

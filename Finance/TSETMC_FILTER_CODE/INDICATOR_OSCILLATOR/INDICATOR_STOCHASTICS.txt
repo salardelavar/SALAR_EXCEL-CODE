@@ -1,0 +1,28 @@
+  true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 14;// day num - default: 14
+var PRICE_NOW = [ih][0].PDrCotVal;
+var ST_MIN = 20;// between 0 - 100 -> Min: 20
+var ST_MAX = 30;// between 0 - 100 -> Max: 80
+        var MIN = function(t){
+        var min,i;
+        min = [ih][0].PriceMin;
+        for(i=1;i<t;i++){
+        if (min > [ih][i].PriceMin)
+        min = [ih][i].PriceMin;
+        }
+       return min;
+    };
+        var MAX=function(t){
+        var max,i;
+        max = [ih][0].PriceMax;
+        for(i=1;i<t;i++){
+        if (max < [ih][i].PriceMax)
+        max = [ih][i].PriceMax;
+        }
+       return max;
+    };
+        var DIFF = (PRICE_NOW-MIN(PERIOD))/(MAX(PERIOD)-MIN(PERIOD))*100;
+        if(DIFF >= ST_MIN && DIFF <= ST_MAX){return true;}
+        else{return false;}  
+}()

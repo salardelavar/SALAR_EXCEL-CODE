@@ -1,0 +1,24 @@
+true==function(){
+var PERIOD = 5;// rsi day num
+var RSI_MIN = 30; // percent
+var RSI_MAX = 35;// percent
+   var RSI =function(t){
+      var i,mom;
+      var Psum=0,Nsum=0;
+      for (i=0;i<t+1;i++){
+     mom = [ih][i].PClosing-[ih][i+1].PClosing;
+     if(mom >= 0)
+     Psum += mom;
+     if(mom < 0)
+     Nsum += -mom;
+      }
+      var RSIndex = 100*Psum/(Psum+Nsum);
+     return RSIndex;
+   };
+      if(RSI(PERIOD) >= RSI_MIN  && RSI(PERIOD) <= RSI_MAX){
+      return true;
+      } 
+      else{
+      return false;
+      }
+}()

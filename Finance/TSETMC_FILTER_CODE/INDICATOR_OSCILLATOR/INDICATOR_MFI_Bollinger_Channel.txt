@@ -1,0 +1,46 @@
+true==function(){
+var PERIOD = 14;// rsi day num
+var Multi = 2;// abs value
+var MFI_BOL_MIN = 30; // Between 0-100
+var MFI_BOL_MAX = 35;// Between 0-100
+   var MFI =function(tmin,tmax){
+      var i,mfi,mom,Pave,Nave;
+      var Psum=0,Nsum=0,sum=0;
+      for (i=tmin;i<tmax+1;i++){
+     mom = [ih][i].QTotCap-[ih][i+1].QTotCap;
+     if(mom >= 0)
+     Psum += mom;
+     if(mom < 0)
+     Nsum += -mom;
+      }
+      mfi = 100*Pave/(Pave+Nave);
+     return mfi;
+   };
+   var AVERAGE=function(t){
+        var Average,sum=0,i;
+        for(i=0;i<t;i++){
+        sum += MFI(i,14+i);
+        }
+        Average = sum/t;
+       return Average;
+    };
+	var average = AVERAGE(PERIOD);
+	var STD=function(t){
+        var A,sum=0,i;
+        for(i=0;i<t;i++){
+        sum += (MFI(i,14+i) - average)*(MFI(i,14+i) - average);
+        }
+        A = Math.sqrt(sum/t);
+       return A;
+    };
+      var average = AVERAGE(PERIOD);
+	  var std_Min = average - Multi*STD(PERIOD);
+	  var std_Max = average + Multi*STD(PERIOD);
+      var a = (MFI(0,PERIOD) - std_Min)/(std_Max - std_Min);
+	  if(a >= MFI_BOL_MIN && a <= MFI_BOL_MAX){
+      return true;
+      } 
+      else{
+      return false;
+      }
+}()

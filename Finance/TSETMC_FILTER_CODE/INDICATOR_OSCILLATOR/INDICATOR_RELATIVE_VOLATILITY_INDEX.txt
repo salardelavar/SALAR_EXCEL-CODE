@@ -1,0 +1,60 @@
+true==function(){// Relative Volatility Index 
+var PERIOD = 14;// rvi day num
+var RVI_MIN = 30; // percent
+var RVI_MAX = 35;// percent
+var RVI_LOW =function(t){
+      var A,i,j,mom,sum;
+      var Psum=0,Nsum=0;
+      for (i=0;i<2*t;i++){
+        sum=0;
+        for(j=i;j<t+i;j++){
+        sum += [ih][j].PriceMin;
+        }
+        A = sum/t;sum=0;
+        for(j=i;j<t+i;j++){
+         sum += ([ih][j].PriceMin - A)*([ih][j].PriceMin - A);
+        }
+        A = Math.sqrt(sum/t);
+     mom = [ih][i].PriceMin-[ih][i+1].PriceMin;
+     if(mom >= 0)
+     Psum += A;
+     if(mom < 0)
+     Nsum += A;
+      }
+      var Pave=Psum/t;
+      var Nave=Nsum/t;
+      var RVIndex = 100*Pave/(Pave+Nave);
+     return RVIndex;
+};
+var RVI_HIGH =function(t){
+      var A,i,j,mom,sum;
+      var Psum=0,Nsum=0;
+      for (i=0;i<2*t;i++){
+        sum=0;
+        for(j=i;j<t+i;j++){
+        sum += [ih][j].PriceMax;
+        }
+        A = sum/t;sum=0;
+        for(j=i;j<t+i;j++){
+         sum += ([ih][j].PriceMax - A)*([ih][j].PriceMax - A);
+        }
+        A = Math.sqrt(sum/t);
+     mom = [ih][i].PriceMax-[ih][i+1].PriceMax;
+     if(mom >= 0)
+     Psum += A;
+     if(mom < 0)
+     Nsum += A;
+      }
+      var Pave=Psum/t;
+      var Nave=Nsum/t;
+      var RVIndex = 100*Pave/(Pave+Nave);
+     return RVIndex;
+};
+var RVI = (RVI_HIGH(PERIOD)-RVI_LOW(PERIOD))/2;
+      if(RVI >= RVI_MIN  && RVI <= RVI_MAX){
+      return true;
+      } 
+      else{
+      return false;
+      }
+}()

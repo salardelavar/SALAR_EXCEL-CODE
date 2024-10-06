@@ -1,0 +1,19 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// Original AO_RATIO = (SMA(5) - SMA(34))
+var PERIOD_MIN = 5;// default day num
+var PERIOD_MAX = 34;// default day num
+var PERCENT_MIN = .01;
+var PERCENT_MAX = .02;
+var SMA = function(t){
+var sm = ([ih][0].PriceMax + [ih][0].PriceMin)*.5;
+for (var i=1;i<t;i++){
+sm +=([ih][i].PriceMax + [ih][i].PriceMin)*.5;
+}
+sm = sm/t;
+return sm;
+};
+var AO_RATIO = (SMA(PERIOD_MIN) - SMA(PERIOD_MAX))/SMA(PERIOD_MIN);
+if (AO_RATIO >= PERCENT_MIN && AO_RATIO <= PERCENT_MAX){return true;}
+else{return false;}
+}()

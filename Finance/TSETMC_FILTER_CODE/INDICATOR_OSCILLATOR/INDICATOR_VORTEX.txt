@@ -1,0 +1,20 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD = 5;// day num
+        var VORTEX=function(t){
+        var minus,ans,sumVMP=0,sumVMN=0,sumTR=0,i;
+        for(i=0;i<t;i++){
+         sumVMP = sumVMP + ([ih][i].PriceMax - [ih][i+1].PriceMin);
+         sumVMN = sumVMN + ([ih][i].PriceMin - [ih][i+1].PriceMax);
+        sumTR =  sumTR + Math.max([ih][i].PriceMax-[ih][i].PriceMin,Math.abs([ih][i].PriceMax-[ih][i+1].PDrCotVal),Math.abs([ih][i].PriceMin-[ih][i+1].PDrCotVal));
+        }
+        if ((sumVMN/sumTR) == 1 && (sumVMP/sumTR) == 1)
+        return 1;
+        else
+        return 0;  
+    };
+        if(VORTEX(PERIOD) == 1){// check just positive value
+        return true;
+    }
+        else{return false;}    
+}()

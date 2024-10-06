@@ -1,0 +1,19 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD_MIN = 12;// day num - default = 12 
+var PERIOD_MAX = 26;// day num - default = 26
+var PO_PERCENT_MIN = 0;// percent
+var PO_PERCENT_MAX = .01;// percent
+var EMA_PO = function(t){
+var sm = 0,em = 0;
+for (i=0;i<t;i++){
+sm = sm + [ih][i].PDrCotVal;
+}
+sm = sm / t;
+em = sm + (2/(t+1))*([ih][0].PDrCotVal - sm);
+return em;
+};
+var DIFF = (EMA_PO(PERIOD_MIN) - EMA_PO(PERIOD_MAX)) / EMA_PO(PERIOD_MAX);
+if(DIFF >= PO_PERCENT_MIN && DIFF <= PO_PERCENT_MAX){return true;}
+else{return false;}    
+}()

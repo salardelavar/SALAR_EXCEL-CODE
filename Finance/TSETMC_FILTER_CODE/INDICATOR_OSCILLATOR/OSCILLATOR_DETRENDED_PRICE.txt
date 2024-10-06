@@ -1,0 +1,21 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+// DPO = Price – SMA of ((n/2)+1) periods ago
+// Orginal DIFF is : PRICE_NOW - DPO(PERIOD) but we changed it to ratio
+var PERIOD = 21;// day num - default = 21
+var PRICE_NOW = [ih][0].PDrCotVal; 
+var DPO_PERCENT_MIN = 0.05;// percent
+var DPO_PERCENT_MAX = 0.1;// percent
+var DPO = function(t){
+var ave,sm=0;
+var D = Math.ceil(.5*t+1); 
+for (i=D+t;i>=D;i--){
+sm += [ih][i].PDrCotVal;
+}
+ave = sm/t;
+return ave;
+};
+var DIFF = (PRICE_NOW - DPO(PERIOD))/DPO(PERIOD);
+if(DIFF >= DPO_PERCENT_MIN && DIFF <= DPO_PERCENT_MAX){return true;}
+else{return false;}    
+}()
