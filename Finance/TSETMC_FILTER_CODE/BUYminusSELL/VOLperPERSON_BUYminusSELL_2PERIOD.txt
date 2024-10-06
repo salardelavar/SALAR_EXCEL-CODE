@@ -1,0 +1,28 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+        var PERIOD_MIN = 1;// day num
+        var PERIOD_MAX = 3;// day num
+        var BMSV_PERCENT_MIN = 0.4;// (volume/number) ratio
+        var BMSV_PERCENT_MAX = 0.5;// (volume/number) ratio
+        var DIFF; 
+        var BuyMinusSellVol=function(t){
+        var minus,ans,sumB=0,sumS=0,i;
+        for(i=0;i<t;i++){
+        minus = [ih][i].PClosing - [ih][i+1].PClosing;
+        if (minus >= 0)
+         sumB = sumB + ([ih][i].QTotTran5J/[ih][i].ZTotTran);// Buy volume
+        if (minus < 0)
+         sumS = sumS + ([ih][i].QTotTran5J/[ih][i].ZTotTran);// Sell volume
+        }
+       ans = sumB - sumS;
+       return ans;
+    };
+        DIFF = (BuyMinusSellVol(PERIOD_MIN) - BuyMinusSellVol(PERIOD_MAX)) / BuyMinusSellVol(PERIOD_MAX);
+        if(BuyMinusSellVol(PERIOD_MIN) >= 0){// check just positive value
+        if(DIFF <= BMSV_PERCENT_MAX && DIFF >= BMSV_PERCENT_MIN)
+        return true;
+    }
+        else{
+        return false;
+    }    
+}()

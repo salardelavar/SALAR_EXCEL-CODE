@@ -1,0 +1,45 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+        var Period_MIN =10;// day num
+        var Period_MAX = 30;// day num
+        var BMSV_PERCENT_MIN = 0.0;// (volume/number) ratio
+        var BMSV_PERCENT_MAX = 0.9;// (volume/number) ratio
+        var BMSP_PERCENT_MIN = 0.0;// price ratio
+        var BMSP_PERCENT_MAX = 0.9;// price ratio
+        var DIFF_VOL,DIFF_PRICE; 
+        var Volume_BuyMinusSell=function(t){
+        var minus,ans,sumB=0,sumS=0,i;
+        for(i=0;i<t;i++){
+        minus = [ih][i].PClosing - [ih][i+1].PClosing;
+        if (minus >= 0)
+         sumB = sumB + ([ih][i].QTotTran5J/[ih][i].ZTotTran);// Buy (Volume/TradePerPerson)
+        if (minus < 0)
+         sumS = sumS + ([ih][i].QTotTran5J/[ih][i].ZTotTran);// Sell (Volume/TradePerPerson)
+        }
+       ans = sumB - sumS;
+       return ans;
+    };
+        var Price_BuyMinusSell=function(t){
+        var minus,ans,sumB=0,sumS=0,i;
+        for(i=0;i<t;i++){
+        minus = [ih][i].PClosing - [ih][i+1].PClosing;
+        if (minus >= 0)
+         sumB = sumB + [ih][i].PClosing;// Buy volume
+        if (minus < 0)
+         sumS = sumS + [ih][i].PClosing;// Sell volume
+        }
+       ans = sumB - sumS;
+       return ans;
+    };
+        DIFF_VOL = (Volume_BuyMinusSell(Period_MIN) - Volume_BuyMinusSell(Period_MAX)) / Volume_BuyMinusSell(Period_MAX);
+        DIFF_PRICE = (Price_BuyMinusSell(Period_MIN) - Price_BuyMinusSell(Period_MAX)) / Price_BuyMinusSell(Period_MAX);
+        if(Volume_BuyMinusSell(Period_MIN) >= 0){// check just positive value
+        if(DIFF_VOL <= BMSV_PERCENT_MAX && DIFF_VOL >= BMSV_PERCENT_MIN)
+        if(Price_BuyMinusSell(Period_MIN) >= 0)// check just negative value
+        if(DIFF_PRICE <= BMSP_PERCENT_MAX && DIFF_PRICE >= BMSP_PERCENT_MIN)
+        return true;
+    }
+        else{
+        return false;
+    }    
+}()

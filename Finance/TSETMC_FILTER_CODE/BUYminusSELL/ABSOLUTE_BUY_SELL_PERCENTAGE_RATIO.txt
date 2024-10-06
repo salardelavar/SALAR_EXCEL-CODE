@@ -1,0 +1,29 @@
+true==function(){
+// Written By salar.d.ghashghaei@gmail.com
+var PERIOD =10;// day num
+var P_PERCENT_MIN = 0.0;// price ratio
+var P_PERCENT_MAX = 0.9;// price ratio
+        var POSTIVE_PRICE=function(t){
+        var P,sum=0,i;
+        for(i=0;i<t;i++){
+        P = ([ih][i].PClosing-[ih][i+1].PClosing)/[ih][i+1].PClosing;
+        if (P >= 0)
+         sum += P;
+        }
+       return sum;
+    };
+        var NEGATIVE_PRICE=function(t){
+        var P,sum=0,i;
+        for(i=0;i<t;i++){
+        P = ([ih][i].PClosing-[ih][i+1].PClosing)/[ih][i+1].PClosing;
+        if (P < 0)
+         sum += Math.abs(P);
+        }
+       return sum;
+    };
+       var DIFF_PRICE = POSTIVE_PRICE(PERIOD)/(POSTIVE_PRICE(PERIOD)+NEGATIVE_PRICE(PERIOD));
+        if(DIFF_PRICE >= P_PERCENT_MIN && DIFF_PRICE <= P_PERCENT_MAX){// check just positive value
+        return true;
+    }
+        else{return false;}    
+}()
